@@ -10,55 +10,57 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">RTno2</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">RTno2</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="get_started.html">Get Started</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-disabled disabled>Document</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-disabled disabled href="#">Link</a>
+            </li>
+            <!-- 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
           </li>
+          -->
+            <!--
           <li class="nav-item">
-            <a class="nav-link" href="get_started.html">Get Started</a>
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-disabled disabled>Document</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-disabled disabled href="#">Link</a>
-          </li>
-          <!-- 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          -->
           </ul>
-        </li>
-        -->
           <!--
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
         -->
-        </ul>
-        <!--
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      -->
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <div id="rtno2-carousel" class="carousel slide">
     <div class="carousel-indicators">
@@ -130,7 +132,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#rtno2-carousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -140,11 +141,40 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
+  </div> <!-- End of Carousel  -->
+
+  <div class="container-sm p-3">
+    <div class="row">
+      <div class="col-sm-6">
+        <a href="get_started.html">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="images/arduinos.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Get Started</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">RTno2が初めての方に</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-6">
+        <a href="documents.html">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="images/arduinos.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Document</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">RTno2をより使いこなしたい人に</p>
+            </div>
+          </div>
+        </a>
+    
+      </div>
+    </div>
   </div>
   <div class="container-sm" id="main-container">
-
-
     <div class="container">
       <!-- Footer -->
       <footer class="text-center text-lg-start text-white">
@@ -160,10 +190,10 @@
 
                 <p>
                   RTno2プロジェクトメンバー
-                  <ul>
-                    <li>菅　佑樹 (早稲田大学理工総研、株式会社SUGAR SWEET ROBOTICS): X: ysuga
-                    </li>
-                  </ul>
+                <ul>
+                  <li>菅　佑樹 (早稲田大学理工総研、株式会社SUGAR SWEET ROBOTICS): X: ysuga
+                  </li>
+                </ul>
                 </p>
               </div>
               <!--Grid column-->
@@ -215,7 +245,7 @@
           </section>
           <!-- Section: Links -->
 
-        
+
         </div>
         <!-- Grid container -->
 

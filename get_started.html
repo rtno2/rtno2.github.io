@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Get Started</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get Started</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">RTno2</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="get_started.html">Get Started</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-disabled disabled>Document</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-disabled disabled href="#">Link</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">RTno2</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="get_started.html">Get Started</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-disabled disabled>Document</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-disabled disabled href="#">Link</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="container-sm" id="main-container">
     <main class="container pt-3">
@@ -40,29 +42,155 @@
         <div class="col-md-3 mb-4">
           <h4 class="mb-3">メニュー</h4>
           <ul class="list-unstyled menu-links">
-            <li class="mb-2"><a href="#overview" class="fw-bold text-dark">概要</a></li>
-            <li class="mb-2"><a href="#install" class="fw-bold text-dark">インストール</a></li>
-            <li class="mb-2"><a href="#test" class="fw-bold text-dark">テスト</a></li>
+            <li class="mb-2"><a href="#overview" class="fw-bold text-dark">1. 概要</a></li>
+            <li class="mb-2"><a href="#install" class="fw-bold text-dark">2. インストール</a></li>
+            <li class="mb-2"><a href="#install-arduino-ide" class="fw-bold text-dark">2.1. Arduino IDEのインストール</a></li>
+            <li class="mb-2"><a href="#install-rtno2-library" class="fw-bold text-dark">2.2. RTno2ライブラリのインストール</a></li>
+            <li class="mb-2"><a href="#install-rtno2-proxy" class="fw-bold text-dark">2.3. RTno2Proxyのインストール</a></li>
+            <li class="mb-2"><a href="#test" class="fw-bold text-dark">3. テスト</a></li>
           </ul>
         </div>
         <section class="col-md-9">
           <h1 class="mb-4">はじめに</h1>
           <section id="overview">
-            <h2>概要</h2>
-            <p>このページではRTNO2の使い方を説明します。</p>
+            <h2>1. 概要</h2>
+            <div class="container mb-4">
+              <p>
+                RTno (アールティーノ) とは、arduinoのようなマイコンボードをRTミドルウェアで簡単に扱うためのライブラリおよびツール群です。
+                名前のRTnoはRT + arduinoから取られています。
+              </p>
+              <p>
+                RTnoは、RTミドルウェアの開発を容易にすることを目的としています。
+                RTミドルウェアは、ロボットシステムの構築において重要な役割を果たしていますが、その開発には専門的な知識と経験が必要です。
+                特に、マイコンボードを使用したシステムでは、ハードウェアとソフトウェアの両方の理解が求められます。
+                RTnoを使うと、これらの課題を克服し、よりスムーズにRTミドルウェアを利用できるようになります。
+              </p>
+              <p>
+                RTnoは、マイコンボード上の組み込みソフトウェア開発で使われるライブラリを提供しています。
+                このライブラリのAPIを使うと、PC上で動くツール (RTnoProxy) が中立ちとなって、他のRTコンポーネントと通信することができます。
+                RTnoProxyとは、Serialを使った通信の他、TCPソケットを使った通信に対応しています。
+              </p>
+              <p>
+                通常であれば、RTコンポーネントに対応した組み込みデバイス開発では、
+                「組み込みデバイス内のコントローラで動作するソフトウェア」
+                「PC上で動作する、組み込みデバイスと通信するソフトウェア（RTコンポーネント）」の両方の開発に加えて、
+                ２者間の通信プロトコルを定義することが必要です。
+                RTnoを使えば、組み込みデバイス側のソフトウェアのみを開発することで、PC上のツールを中立ちとして、
+                他のRTコンポーネントと通信するデバイスが開発できます。
+              </p>
+            </div>
           </section>
           <section id="install">
-            <h2>インストール</h2>
-            <p>インストール方法について記載してください。</p>
-          </section>
+            <h2>2. インストール</h2>
+            <div class="container mb-4">
+              インストールには以下の手順が必要になります。
+              <ol>
+                <li>Arduino IDEのインストール</li>
+                <li>RTno2ライブラリのインストール (ZIPファイルから または ライブラリマネージャから)</li>
+                <li>RTno2Proxyのインストール</li>
+              </ol>
+              <section id="install-arduino-ide">
+                <h4>2.1. Arduino IDEのインストール</h4>
+                <div class="container mb-4">
+                  <p>
+                    RTnoを使うには、まずArduino IDEをインストールしてください。
+                    Arduino IDEは、公式サイト (https://www.arduino.cc/en/software) からダウンロードできます。
+                    インストール手順については、公式サイトのガイドを参照してください。
+                  </p>
+                </div>
+              </section>
+              <section id="install-rtno2-library">
+                <h4>2.2. RTno2ライブラリのインストール</h4>
+                <div class="container mb-4">
+                  <h5>a. RTno2ライブラリのインストール (ZIPファイルから) </h5>
+                  <div class="container mb-4">
+                    <p>
+                      RTno2ライブラリは、ZIPファイルからもインストールできます。
+                      まず、RTno2のGitHubリポジトリ (https://github.com/rtno2/RTno2) からZIPファイルをダウンロードしてください。
+                      ダウンロードしたZIPファイルを解凍し、Arduino IDEを起動します。
+                      メニューから「スケッチ」->「ライブラリをインクルード」->「.ZIP形式のライブラリをインストール...」を選択し、
+                      解凍したフォルダを指定してインストールしてください。
+                    </p>
+                  </div>
+                  <h5>b. RTno2ライブラリのインストール (ライブラリマネージャから (近日対応予定)) </h5>
+                  <div class="container mb-4">
+                    <p>
+                      RTno2ライブラリは、Arduino IDEのライブラリマネージャを使ってインストールできます。
+                      Arduino IDEを起動し、メニューから「スケッチ」->「ライブラリを管理...」を選択します。
+                      ライブラリマネージャが開いたら、検索バーに「RTno2」と入力し、表示された結果からRTno2ライブラリを選択してインストールしてください。
+                    </p>
+                  </div>
+                </div>
+              </section> <!-- <section install-rtno2-library> -->
+              <section id="install-rtno2-proxy">
+                <h4>2.3. RTno2Proxyのインストール</h4>
+                <div class="container mb-4">
+                  <h5>a. RTno2Proxyのインストール (Windowsバイナリ) </h5>
+                  <div class="container mb-4">
+                    <p>
+                      Windowsであれば、RTno2Proxyの最新のリリースを
+                      GitHubリポジトリ (https://github.com/rtno2/RTno2Proxy) からダウンロードしてください。
+                      ダウンロードしたZIPファイルを解凍し、任意の場所に配置してください。
+                      RTno2Proxyは、コマンドプロンプトから実行できます。
+                    </p>
+                  </div>
+                  <h5>b. RTno2Proxyのインストール (Linux) </h5>
+                  <div class="container mb-4">
+                    <p>
+                      Linuxでは、RTno2Proxyをソースコードからビルドする必要があります。
+                      まず、GitHubリポジトリ (https://github.com/rtno2/RTno2ProxyRTC) からソースコードをクローンしてください。
+                      ターミナルを開き、クローンしたディレクトリに移動してビルドしてください。
+                      以下のようなコマンドを使用します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+$ git clone https://github.com/rtno2/RTno2ProxyRTC.git
+$ cd RTno2ProxyRTC
+$ git submodule update --init --recursive
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make</pre>
+                    ビルドが完了したら、build/srcディレクトリにRTno2Proxyがあります。RTno2Proxyを実行できます。
+                    </p>
+                  </div>
+                  <h5>c. RTno2Proxyのインストール (Windows Visual Studio) </h5>
+                  <div class="container mb-4">
+                    <p>
+                      Windows環境でVisual Studioを使用している場合、RTno2Proxyをソースコードからビルドできます。
+                      まず、GitHubリポジトリ (https://github.com/rtno2/RTno2ProxyRTC) からソースコードをクローンしてください。
+                      次に、CMakeを使用してVisual Studioのソリューションファイルを生成します。
+                      ターミナルを開き、クローンしたディレクトリに移動して以下のコマンドを実行します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+$ git clone https://github.com/rtno2/RTno2ProxyRTC.git
+$ cd RTno2ProxyRTC
+$ git submodule update --init --recursive
+$ mkdir build
+$ cd build
+$ cmake -G "Visual Studio 16 2019" ..</pre>
+                    これにより、Visual Studio用のソリューションファイルが生成されます。
+                    次に、Visual Studioを開き、クローンしたディレクトリを開いてビルドしてください。
+                    ビルドが完了したら、build/Debugまたはbuild/ReleaseディレクトリにRTno2Proxyがあります。RTno2Proxyを実行できます。
+                    </p>
+                  </div>
+                </div>
+              </section><!-- <section install-rtno2-proxy> -->
+            </div>
+          </section> <!-- <section install> -->
           <section id="test">
             <h2>テスト</h2>
-            <p>テスト方法について記載してください。</p>
+
+            <div class="container">
+              テストではArduino UNO R3かArduino R4 Minimaでテストしています。USBシリアル接続のArduinoを最初に試してみると良いと思います。
+              <h4>RTno2ライブラリを使ったArduinoソフトウェアのビルド</h4>
+              <p>
+                Arduino IDEを開き、「ファイル」「スケッチの例」「RTno2」と選択し最後に「AutoTestProgram」を選択します。
+                ArduinoボードをPCに接続し、適切なボードとポートを選択してから、スケッチをアップロードします。
+              </p>
+            </div>
           </section>
         </section>
       </div>
     </main>
-       
+
 
 
     <div class="container">
@@ -80,10 +208,10 @@
 
                 <p>
                   RTno2プロジェクトメンバー
-                  <ul>
-                    <li>菅　佑樹 (早稲田大学理工総研、株式会社SUGAR SWEET ROBOTICS): X: ysuga
-                    </li>
-                  </ul>
+                <ul>
+                  <li>菅　佑樹 (早稲田大学理工学総合研究所、早稲田大学表現工学科尾形哲也研究室、株式会社SUGAR SWEET ROBOTICS): X: ysuga
+                  </li>
+                </ul>
                 </p>
               </div>
               <!--Grid column-->
@@ -135,7 +263,7 @@
           </section>
           <!-- Section: Links -->
 
-        
+
         </div>
         <!-- Grid container -->
 
@@ -149,10 +277,10 @@
       <!-- Footer -->
     </div>
     <!-- End of .container -->
-</div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"></script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
