@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-
+<!DOCTYPE html encoding="UTF-8">
+<html lang="ja" encoding="UTF-8">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -176,18 +175,179 @@ $ cmake -G "Visual Studio 16 2019" ..</pre>
             </div>
           </section> <!-- <section install> -->
           <section id="test">
-            <h2>テスト</h2>
-
-            <div class="container">
-              テストではArduino UNO R3かArduino R4 Minimaでテストしています。USBシリアル接続のArduinoを最初に試してみると良いと思います。
-              <h4>RTno2ライブラリを使ったArduinoソフトウェアのビルド</h4>
+            <h2>3. テスト</h2>
+            <div class="container mb-4">
               <p>
-                Arduino IDEを開き、「ファイル」「スケッチの例」「RTno2」と選択し最後に「AutoTestProgram」を選択します。
-                ArduinoボードをPCに接続し、適切なボードとポートを選択してから、スケッチをアップロードします。
+                テストではArduino R4 Minima, M5 Core2でテストしています。USBシリアル接続のArduinoを最初に試してみると良いと思います。
+                （Arduino Uno R3でもテストを行なっていますが、メモリが少ないため一部のテストが実行できません。）
+                AVRマイコンボードのArduinoの場合、double型がfloat型として扱われることに注意してください。RTno2ProxyライブラリおよびRTno2ライブラリではマイコンのCPUを検出した後に
+                自動的にdoubleを4バイト長に変換しながら使っていますが、精度はfloatになります。
               </p>
-            </div>
+              <div class="container">
+                <h4>3.1 RTno2ライブラリを使ったArduinoソフトウェアのビルドとテスト</h4>
+                <div class="container mb-4">
+                  <h5>a. Arduino IDEでのビルドとテスト用スケッチのアップロード</h5>
+                  <div class="container mb-4">
+                    <p>
+                      Arduino IDEを開き、「ファイル」「スケッチの例」「RTno2」と選択し最後に「AutoTestProgram」を選択します。
+                      ArduinoボードをPCに接続し、適切なボードとポートを選択してから、スケッチをアップロードします。
+                    </p>
+                    <p>
+                      AVRマイコンボードのArduinoの場合、メモリが足りずに全てのテストを実行することができません。
+                      ifdef文でコメントアウトされている部分を有効にして、必要に応じてテストを実行してください。
+                    </p>
+                  </div>
+                  <h5>b. RTno2Proxyを使ったテスト</h5>
+                  <div class="container mb-4">
+                    <p>
+                      RTno2Proxyを使って、ArduinoボードにアップロードしたAutoTestProgramスケッチのテストを実行します。
+                      RTno2Proxyでは、OpenRTM-aistを使わずにライブラリ単体でArduinoと通信してテストを行うことができます。
+                    </p>
+                    <p>
+                      RTno2Proxyを起動し、Arduinoボードが接続されているシリアルポートを指定して実行します。
+                      例えば、Windowsの場合は以下のようにコマンドプロンプトで実行します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+C:\path\to\rtno_test.exe COM3 57600</pre>
+                    Linuxの場合は以下のようにターミナルで実行します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+$ ./build/src/rtno_test /dev/ttyACM0 57600</pre>
+                      以下のような出力が表示され、テストが実行されます。
+                    <pre class="bg-dark p-1 m-3 text-white">[RTno2Proxy] Started.
+[2025-11-10 19:11:38.303] [main] [info] [TEST] 'Bool data test. Send true then recv it'
+[2025-11-10 19:11:38.329] [main] [info]   [PASSED] 'Bool data test. Send true then recv it' OK
+[2025-11-10 19:11:38.332] [main] [info] [TEST] 'Bool negative data test. Send false then recv it'
+[2025-11-10 19:11:38.358] [main] [info]   [PASSED] 'Bool negative data test. Send false then recv it' OK
+[2025-11-10 19:11:38.361] [main] [info] [TEST] 'Character data test. Send 'c' then recv it'
+[2025-11-10 19:11:38.388] [main] [info]   [PASSED] 'Character data test. Send 'c' then recv it' OK
+[2025-11-10 19:11:38.391] [main] [info] [TEST] 'Octet data test. Send 0x32 then recv it'
+[2025-11-10 19:11:38.418] [main] [info]   [PASSED] 'Octet data test. Send 0x32 then recv it' OK
+[2025-11-10 19:11:38.422] [main] [info] [TEST] 'Long positive data test. Send 3 then recv it'
+[2025-11-10 19:11:38.450] [main] [info]   [PASSED] 'Long positive data test. Send 3 then recv it' OK
+[2025-11-10 19:11:38.452] [main] [info] [TEST] 'Long negative data test. Send -3 then recv it'
+[2025-11-10 19:11:38.480] [main] [info]   [PASSED] 'Long negative data test. Send -3 then recv it' OK
+[2025-11-10 19:11:38.483] [main] [info] [TEST] 'Float positive data test. Send 3.0f then recv it'
+[2025-11-10 19:11:38.512] [main] [info]   [PASSED] 'Float positive data test. Send 3.0f then recv it' OK
+[2025-11-10 19:11:38.515] [main] [info] [TEST] 'Double positive data test. Send 3.0 then recv it'
+[2025-11-10 19:11:38.547] [main] [info]   [PASSED] 'Double positive data test. Send 3.0 then recv it' OK
+[2025-11-10 19:11:38.550] [main] [info] [TEST] 'BoolSeq data test. Send true then recv it'
+[2025-11-10 19:11:38.581] [main] [info]   [PASSED] 'BoolSeq data test. Send true then recv it' OK
+[2025-11-10 19:11:38.584] [main] [info] [TEST] 'BoolSeq negative data test. Send false then recv it'
+[2025-11-10 19:11:38.614] [main] [info]   [PASSED] 'BoolSeq negative data test. Send false then recv it' OK
+[2025-11-10 19:11:38.617] [main] [info] [TEST] 'CharacterSeq data test. Send 'abc' then recv it'
+[2025-11-10 19:11:38.648] [main] [info]   [PASSED] 'CharacterSeq data test. Send 'abc' then recv it' OK
+[2025-11-10 19:11:38.651] [main] [info] [TEST] 'OctetSeq data test. Send 0x32,0x33,0x34 then recv it'
+[2025-11-10 19:11:38.683] [main] [info]   [PASSED] 'OctetSeq data test. Send 0x32,0x33,0x34 then recv it' OK
+[2025-11-10 19:11:38.686] [main] [info] [TEST] 'LongSeq positive single element vector test. Send {3} then recv it'
+[2025-11-10 19:11:38.717] [main] [info]   [PASSED] 'LongSeq positive single element vector test. Send {3} then recv it' OK
+[2025-11-10 19:11:38.720] [main] [info] [TEST] 'LongSeq positive vector test. Send {3, 2, 1} then recv it'
+[2025-11-10 19:11:38.755] [main] [info]   [PASSED] 'LongSeq positive vector test. Send {3, 2, 1} then recv it' OK
+[2025-11-10 19:11:38.758] [main] [info] [TEST] 'FloatSeq positive single element vector test. Send {3.0f} then recv it'
+[2025-11-10 19:11:38.791] [main] [info]   [PASSED] 'FloatSeq positive single element vector test. Send {3.0f} then recv it' OK
+[2025-11-10 19:11:38.794] [main] [info] [TEST] 'FloatSeq positive vector test. Send {3.0f, 2.0f, 1.0f} then recv it'
+[2025-11-10 19:11:38.829] [main] [info]   [PASSED] 'FloatSeq positive vector test. Send {3.0f, 2.0f, 1.0f} then recv it' OK
+[2025-11-10 19:11:38.833] [main] [info] [TEST] 'DoubleSeq positive single element vector test. Send {3.0} then recv it'
+[2025-11-10 19:11:38.869] [main] [info]   [PASSED] 'DoubleSeq positive single element vector test. Send {3.0} then recv it' OK
+[2025-11-10 19:11:38.872] [main] [info] [TEST] 'DoubleSeq positive vector test. Send {3.0, 2.0, 1.0} then recv it'
+[2025-11-10 19:11:38.913] [main] [info]   [PASSED] 'DoubleSeq positive vector test. Send {3.0, 2.0, 1.0} then recv it' OK
+</pre>
+                    </p>
+                  </div> <!-- <div class="container mb-4"> for b. RTno2Proxyを使ったテスト -->
+                  
+                </div> <!-- <div class="container mb-4"> for RTno2ライブラリを使ったArduinoソフトウェアのビルド -->
+                <h4>3.2 dockerをつかったビルドとテスト</h4>
+                バグが取れなくて・・・未対応です。
+                <!-- 
+                <div class="container mb-4">
+                  <h5>a. docker環境の用意</h5>
+                  <div>
+                    <p>
+                      dockerイメージを使ってOpenRTM-aist 2.0環境を作り、RTno2ProxyRTCのビルドとテストを行うことができます。
+                      以下のコマンドを実行してコードを取得します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+                      $ git clone git@github.com:rtno2/RTno2ProxyRTC.git
+                      $ cd RTno2ProxyRTC
+                      $ git submodule update --init --recursive
+                    </pre>
+                      次に、イメージをビルドします。
+                    <pre class="bg-dark p-1 m-3 text-white">
+                      $ docker compose build
+                    </pre>
+                      ビルドが完了したら、以下のコマンドでコンテナを起動します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+                      $ docker compose up -d
+                    </pre>
+                      コンテナが起動したら、以下のコマンドでコンテナ内に入ります。
+                    <pre class="bg-dark p-1 m-3 text-white">
+                      $ docker exec -it devel-rtm bash
+                    </pre>
+                      /codeディレクトリにコードがあります。
+                    <pre class="bg-dark p-1 m-3 text-white">
+                      $ cd /code
+                      $ mkdir build
+                      $ cd build
+                      $ cmake ..
+                      $ make -j
+                    </pre>
+                      ビルドが完了したら、以下のコマンドでテストを実行します。
+                    </p>
+                  </div>
+                  <h5>b. ホスト環境での通信経路の確保 (com2tcp) </h5>
+                  <div class="container mb-4">
+                    <p>
+                      dockerコンテナからホスト環境のシリアルポートにはLinuxであればアクセスできますが、他のOSだと難しいので、com2tcpという付属のツールを使ってアクセス経路を確保します。
+                      com2tcpは、シリアルポートとTCPソケットの間でデータを中継するツールです。
+                    </p>
+                    <p>
+                      例えば、Windowsであれば以下のようにコマンドプロンプトで実行します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+C:\path\to\com2tcp.exe COM3 59700 10020</pre>
+                    Linuxの場合は以下のようにターミナルで実行します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+$ ./com2tcp /dev/ttyACM0 59700 10020</pre>
+                    これにより、ホスト環境のシリアルポートに対するボーレート59700でアクセスをTCPソケット10020番でアクセスできるようになります。
+                    また、com2tcpは引数なしで実行するとインタラクティブモードとなるので、開いたコマンドプロンプトに対して、
+                    <pre class="bg-dark p-1 m-3 text-white">
+                      > open COM3 59700 10020
+                    </pre>
+                    のように入力しても同様の動作をします。Windows環境ではcom2tcp.exeをダブルクリックするだけで起動できるので便利でしょう。
+                    </p>
+                  </div>
+                  
+                  <h5>c. docker環境でのRTno2ProxyRTCのテスト実行</h5>
+                  <div class="container mb-4">
+                    <p>
+                      dockerコンテナ内で以下のコマンドを実行して、RTno2ProxyRTCのテストを実行します。
+                    <pre class="bg-dark p-1 m-3 text-white">
+$ ./build/src/rtno_test_tcp ホストのIPアドレス 10020</pre>
+                    これにより、com2tcpで確保したTCPソケット10020番を通じて、ホスト環境のシリアルポートに接続されたArduinoボードと通信してテストが実行されます。
+                    </p>
+                  </div>
+                   -->
+                </div> <!-- <div class="container mb-4"> for dockerをつかったビルドとテスト -->
+                  
+                  
+              </div><!-- <div class="container mb-4"> for OpenRTM-aist 2.0をつかったビルドとテスト -->
+            </section>
+
+          <section id="sample">
+            <h2>4. RTno2のサンプル</h2>
+              <div class="container mb-4">
+                <h4>a. サンプルスケッチの紹介</h4>
+                <div class="container mb-4">
+                  RTno2をArduinoにインストールすると、いくつかのサンプルスケッチが利用可能になります。
+                  これらのスケッチは、RTno2ライブラリの基本的な使い方を示しています。
+                  以下に、代表的なサンプルスケッチを紹介します。
+                </div>
+                  <ul>
+                    <li><strong>AutoTestProgram</strong>: RTno2ライブラリの各データ型の送受信をテストするスケッチです。Arduino IDEの「ファイル」「スケッチの例」「RTno2」「AutoTestProgram」から開けます。</li>
+                    <li><strong>TimerOneEC</strong>: RTno2ライブラリを使って、TimerOneライブラリを使ったTimer実行コンテキストの利用例です。Arduino IDEの「ファイル」「スケッチの例」「RTno2」「TimerOneEC」から開けます。</li>
+                    <li><strong>FSPTimerEC</strong>: RTno2ライブラリを使って、標準ArduinoライブラリのFSPTimerを使った実行コンテキストの例です。Arduino IDEの「ファイル」「スケッチの例」「RTno2」「FSPTimerEC」から開けます。</li>
+                    <li><strong>DigitalInOut</strong>: RTno2ライブラリを使ったデジタル入出力ピンの利用例です。Arduino IDEの「ファイル」「スケッチの例」「RTno2」「DigitalInOut」から開けます。</li>
+                  </ul>
+              </div> 
           </section>
-        </section>
+        </section> <!-- <section id="test"> -->
+
       </div>
     </main>
 
